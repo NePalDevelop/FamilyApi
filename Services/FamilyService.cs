@@ -41,21 +41,6 @@ namespace FamilyApi.Services
 
             if (parentsOrKind == 0)
             {
-                //query = from r in _context.Relations
-                //        join h in _context.Humans on r.HumanID equals h.ID
-                //        join k in _context.Humans on r.KinID equals k.ID
-                //        where r.HumanID == humanID
-                //        select 
-                //        new Relation
-                //          {
-                //            RelationID = r.RelationID,
-                //            Kindred = r.Kindred,
-                //            HumanID = h.ID,
-                //            KinID = k.ID,
-                //            Human = h,
-                //            Kin = k
-                //             };
-
                 relations = await _context.Relations
                     .Where(r => r.HumanID.Equals(humanID))
                     .Include(r => r.Kin)
@@ -63,20 +48,6 @@ namespace FamilyApi.Services
             
             } else
             {
-
-                 //query = from r in _context.Relations
-                 //                join h in _context.Humans on r.KinID equals h.ID
-                 //                join k in _context.Humans on r.HumanID equals k.ID
-                 //                where r.KinID == humanID
-                 //                select new Relation
-                 //                {
-                 //                    Kindred = k.Gender == Gender.Man ? Kindred.Son : Kindred.Daughter,
-                 //                    RelationID = r.RelationID,
-                 //                    HumanID = h.ID,
-                 //                    KinID = k.ID,
-                 //                    Human = h,
-                 //                    Kin = k
-                 //                };
 
                 relations = await _context.Relations
                     .Where(r => r.KinID.Equals(humanID))
@@ -96,7 +67,7 @@ namespace FamilyApi.Services
 
 
             return relations;
-//                await query.AsNoTracking().ToListAsync();
+
         }
 
 
